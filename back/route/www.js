@@ -2,14 +2,15 @@
  * 主要框架模块
  */
 const express = require('express')
-const bodyParser = require('body-parser');
-
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const jwtUtil = require('../util/jwtUtil')
 const userRouter = require('./user')
 const enterpriseRouter = require('./enterprise')
 
 const app = new express()
-
+// 配置跨域问题
+app.use(cors())
 // body parser 中间件
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
