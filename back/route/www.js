@@ -2,14 +2,15 @@
  * 主要框架模块
  */
 const express = require('express')
-const bodyParser = require('body-parser');
-
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const jwtUtil = require('../util/jwtUtil')
 const userRouter = require('./user')
-const enterpriseRouter = require('./enterprise')
+const orderRouter = require('./order')
 
 const app = new express()
-
+// 配置跨域问题
+app.use(cors())
 // body parser 中间件
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -44,9 +45,15 @@ app.use((req, res, next) => {
         })
 })
 
+// 允许客户端访问其他头文件
+app.use((req, res, next) => {
+    res.header('Access-Control-Expose-Headers', 'authorization')
+    next()
+})
+
 // 引入路由
 app.use('/user', userRouter)
-app.use('/enterprise', enterpriseRouter)
+app.use('/order', orderRouter)
 
 // 统一处理
 app.use('*', (req, res) => {

@@ -4,7 +4,7 @@
 module.exports = {
     // 配置 mysql 数据库
     mysqlConfig: {
-        host: '20.120.88.159',
+        host: '47.115.206.168',
         port: 3306,
         database: 'Logistics',
         user: 'wuliu',
