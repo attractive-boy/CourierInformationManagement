@@ -164,7 +164,8 @@
             row.sender.toLowerCase().includes(this.search.toLowerCase()) ||
             row.sendWarehouse.toLowerCase().includes(this.search.toLowerCase()) ||
             row.receiver.toLowerCase().includes(this.search.toLowerCase()) ||
-            row.receiveWarehouse.toLowerCase().includes(this.search.toLowerCase())
+            row.receiveWarehouse.toLowerCase().includes(this.search.toLowerCase()) ||
+            row.id.toString().includes(this.search.toLowerCase())
           );
         });
       },

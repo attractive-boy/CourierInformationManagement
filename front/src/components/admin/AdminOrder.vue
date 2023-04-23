@@ -15,32 +15,29 @@
           <el-table-column prop="sender" label="发货客户" />
           <el-table-column prop="receiver" label="收货客户" />
           <el-table-column prop="sendWarehouse" label="发货仓" />
-          <el-table-column prop="receiveWarehouse" label="收获仓"/>
+          <el-table-column prop="receiveWarehouse" label="收获仓" />
           <el-table-column prop="money" label="运费" sortable />
-          <el-table-column prop="orderStatus" label="订单状态"
+          <el-table-column
+            prop="orderStatus"
+            label="订单状态"
             :filters="[
-                {text:'库存中', value:'库存中'},
-                {text:'运输中', value:'运输中'},
-                {text:'等待签收', value:'等待签收'},
-                {text:'已签收', value:'已签收'},
-                {text: '待分配', value: '待分配'}
+              { text: '库存中', value: '库存中' },
+              { text: '运输中', value: '运输中' },
+              { text: '等待签收', value: '等待签收' },
+              { text: '已签收', value: '已签收' },
+              { text: '待分配', value: '待分配' },
             ]"
             :filter-method="filterOrderStatus"
           >
-          <template #default="scope">
-            <el-tag
-              :type="getTagType(scope.row.orderStatus)">
+            <template #default="scope">
+              <el-tag :type="getTagType(scope.row.orderStatus)">
                 {{ scope.row.orderStatus }}
-            </el-tag>
-          </template>
+              </el-tag>
+            </template>
           </el-table-column>
           <el-table-column :min-width="140">
             <template #header>
-              <el-input
-                v-model="search"
-                size="small"
-                placeholder="搜索订单"
-              />
+              <el-input v-model="search" size="small" placeholder="搜索订单" />
             </template>
             <template #default="scope">
               <el-button size="small" @click="showDialog(scope.row)"
@@ -97,7 +94,10 @@
               <el-input v-model="editingOrder.receiver" disabled></el-input>
             </el-form-item>
             <el-form-item label="发货仓" :label-width="'100px'">
-              <el-input v-model="editingOrder.sendWarehouse" disabled></el-input>
+              <el-input
+                v-model="editingOrder.sendWarehouse"
+                disabled
+              ></el-input>
             </el-form-item>
             <el-form-item label="收获仓" :label-width="'100px'">
               <el-input v-model="editingOrder.receiveWarehouse"></el-input>
@@ -120,7 +120,7 @@
     </el-main>
   </el-container>
 </template>
-    
+
 <script>
 import { getOrderList, deleteOrder, updateOrder } from "@/api/orderApi";
 import { ElNotification } from "element-plus";
@@ -145,7 +145,10 @@ export default {
           row.sender.toLowerCase().includes(this.search.toLowerCase()) ||
           row.sendWarehouse.toLowerCase().includes(this.search.toLowerCase()) ||
           row.receiver.toLowerCase().includes(this.search.toLowerCase()) ||
-          row.receiveWarehouse.toLowerCase().includes(this.search.toLowerCase())
+          row.receiveWarehouse
+            .toLowerCase()
+            .includes(this.search.toLowerCase()) ||
+          row.id.toString().includes(this.search.toLowerCase())
         );
       });
     },
@@ -173,7 +176,7 @@ export default {
      * 订单状态过滤器
      */
     filterOrderStatus(value, row) {
-        return row.status == value
+      return row.status == value;
     },
     /**
      * 修改用户
@@ -242,20 +245,20 @@ export default {
       this.dialogVisible = true;
     },
     getTagType(state) {
-      if (state == '待分配') {
-        return 'danger'
+      if (state == "待分配") {
+        return "danger";
       }
-      if (state == '库存中') {
-          return 'info'
+      if (state == "库存中") {
+        return "info";
       }
-      if (state === '运输中') {
-          return 'default'
+      if (state === "运输中") {
+        return "default";
       }
-      if (state === '等待签收') {
-          return 'warning'
+      if (state === "等待签收") {
+        return "warning";
       }
-      return 'success'
-    }
+      return "success";
+    },
   },
 };
 </script>
