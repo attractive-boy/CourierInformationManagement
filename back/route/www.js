@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const jwtUtil = require('../util/jwtUtil')
 const userRouter = require('./user')
-const enterpriseRouter = require('./enterprise')
+const orderRouter = require('./order')
 
 const app = new express()
 // 配置跨域问题
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 
 // 引入路由
 app.use('/user', userRouter)
-app.use('/enterprise', enterpriseRouter)
+app.use('/order', orderRouter)
 
 // 统一处理
 app.use('*', (req, res) => {
