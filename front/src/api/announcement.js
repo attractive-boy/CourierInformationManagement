@@ -37,7 +37,7 @@ export const addannouncement = (order) => {
 export const updateannouncement = (order) => {
     return request({
         url: `${api_name}/update`,
-        method: 'post',
+        method: 'put',
         data: order
     })
 }

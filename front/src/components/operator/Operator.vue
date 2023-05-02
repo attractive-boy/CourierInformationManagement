@@ -35,8 +35,8 @@
             <span>企业信息</span>
           </router-link>
         </el-menu-item>
-        <el-menu-item index="EnterpriseinfoView">
-          <router-link :to="{ name: 'EnterpriseinfoView' }">
+        <el-menu-item index="operator-message">
+          <router-link :to="{ name: 'operator-message' }">
             <el-icon><icon-menu /></el-icon>
             <span>用户留言</span>
           </router-link>

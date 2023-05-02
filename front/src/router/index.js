@@ -56,6 +56,7 @@ const routes = [
             {name: 'operator-home', path: 'home', component: Home},
             {name: 'EnterpriseinfoView', path: 'EnterpriseinfoView', component: EnterpriseinfoView},
             {name: 'adminn-home', path: 'home', component: Home},
+            {name: 'operator-message', path: 'message', component: message},
         ]
     }
 ]

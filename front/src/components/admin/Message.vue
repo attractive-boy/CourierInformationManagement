@@ -104,35 +104,19 @@ export default {
         .then(res => {
           this.curUser = res.data.data
           // 判断是不是管理员
-          if (this.curUser.userType == 1) {
-            getMessageList().then((res) => {
-              // 接口异常
-              if (res.data.code != 3100) {
-                ElNotification({
-                  title: "Error",
-                  message: "接口异常：" + res.data.message,
-                  type: "error",
-                  duration: 3000,
-                });
-                return;
-              }
-              this.orderList = res.data.data;
-            });
-          } else {
-            getSelfMessageList().then((res) => {
-              // 接口异常
-              if (res.data.code != 3100) {
-                ElNotification({
-                  title: "Error",
-                  message: "接口异常：" + res.data.message,
-                  type: "error",
-                  duration: 3000,
-                });
-                return;
-              }
-              this.orderList = res.data.data;
-            });
-          }
+          getMessageList().then((res) => {
+            // 接口异常
+            if (res.data.code != 3100) {
+              ElNotification({
+                title: "Error",
+                message: "接口异常：" + res.data.message,
+                type: "error",
+                duration: 3000,
+              });
+              return;
+            }
+            this.orderList = res.data.data;
+          });
         })
     },
     /**

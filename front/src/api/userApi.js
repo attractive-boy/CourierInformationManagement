@@ -22,7 +22,7 @@ export const submitLogin = (username, password, userTypeName) => {
         },
     })
 }
-    
+
 /**
  * 用户注册，需要包含字段：username、password、userTypeName, email
  */
@@ -69,6 +69,14 @@ export const updateUser = (user) => {
     })
 }
 
+export const updatemyself = (user) => {
+    return request({
+        url: `${api_name}/updatemyself`,
+        method: 'put',
+        data: user
+    })
+}
+
 /**
  * 根据 token 拿到用户信息
  */
@@ -94,7 +102,7 @@ export const isActive = () => {
     try {
         // 产生异常说明解码失败，token 过期
         payload = JSON.parse(atob(token.split('.')[1]))
-    } catch(err) {
+    } catch (err) {
         removeToken()
         return false
     }
@@ -111,7 +119,7 @@ export const getTokenUserInfo = () => {
     try {
         // 产生异常说明解码失败，token 过期
         payload = JSON.parse(atob(token.split('.')[1]))
-    } catch(err) {
+    } catch (err) {
         removeToken()
         return false
     }

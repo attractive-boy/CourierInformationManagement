@@ -176,4 +176,15 @@ userRouter.put('/update', (req, res) => {
         })
 })
 
+userRouter.put('/updatemyself', (req, res) => {
+    const curUser = req.user
+    const updateUser = req.body
+    // 输出sql语句
+    console.log('update tb_user set username = ' + updateUser.username + ',password = ' + updateUser.password + ' where id = ' + updateUser.id)
+    dbUtil.exec('update tb_user set username = ?,password = ? where id = ?',  [updateUser.username, updateUser.password, updateUser.id])
+        .then(result => {
+            return res.json(userStatus.USER_UPDATE_SUCCESS)
+        })
+})
+
 module.exports = userRouter

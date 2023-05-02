@@ -17,8 +17,8 @@ const app = new express()
 app.use(cors())
 app.use("/sf", proxy('www.sf-express.com'));
 // body parser 中间件
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 // 拦截器，查看是否携带 token
 app.use((req, res, next) => {
@@ -62,7 +62,12 @@ app.use('/order', orderRouter)
 app.use('/message', messageRouter)
 app.use('/announcement', announcementRouter)
 
-
+app.use('/posts', (req, res, next) => {
+    return res.json({
+        code: 200,
+        message: '获取成功',
+    })
+})
 // 统一处理
 app.use('*', (req, res) => {
     return res.status(404).json({

@@ -15,18 +15,13 @@ const uuid = require('uuid')
 orderRouter.get('/getAllMessage', (req, res) => {
     const curUser = req.user
     // 管理员才有的权限
-    if (curUser.userType != userTypeNameMap.ADMIN) {
-        res.json(STATUS.ILLEGAL_OPERATION)
-    } else {
-        // 获取未删除的订单
-        dbUtil.exec("select * from tb_message", [])
-            .then(results => {
-                const ret = JSON.parse(JSON.stringify(orderStatus.ORDER_LIST))
-                ret.data = results
-                return res.json(ret)
-            })
-    }
-
+    // 获取未删除的订单
+    dbUtil.exec("select * from tb_message", [])
+        .then(results => {
+            const ret = JSON.parse(JSON.stringify(orderStatus.ORDER_LIST))
+            ret.data = results
+            return res.json(ret)
+        })
 })
 
 /**

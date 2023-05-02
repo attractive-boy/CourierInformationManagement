@@ -44,17 +44,13 @@ orderRouter.delete('/delete/:id', (req, res) => {
  * 添加货单
  */
 orderRouter.post('/add', (req, res) => {
-    const curUser = req.user
-    // 用户的权限
-    if (curUser.userType != userTypeNameMap.OPERATOR) {
-        return res.json(STATUS.ILLEGAL_OPERATION)
-    }
-    const { title, img } = req.body
+    const { title, img,type } = req.body
     const id = uuid.v1()
     const createTime = new Date()
     const updateTime = new Date()
-    dbUtil.exec('insert into tb_announcement(id, title ,img, date) values (?, ?, ?, ?)',
-        [id, title, img, createTime])
+    console.log('createTime: ', createTime)
+    dbUtil.exec('insert into tb_announcement(id, title ,img, date,type) values (?, ?, ?, ?,?)',
+        [id, title, img, createTime, type])
         .then(result => {
             return res.json(orderStatus.ORDER_ADD_SUCCESS)
         }).catch(err => {
@@ -67,19 +63,21 @@ orderRouter.post('/add', (req, res) => {
 orderRouter.put('/update', (req, res) => {
     const curUser = req.user
     // 用户的权限
-    if (curUser.userType != userTypeNameMap.OPERATOR) {
-        return res.json(STATUS.ILLEGAL_OPERATION)
-    }
-    const { title, img, id } = req.body
+    const { title, img, id,type } = req.body
     const updateTime = new Date()
-    dbUtil.exec('update tb_announcement set title = ?, img = ?, date = ? where id = ?',
-        [title, img, updateTime, id])
+    dbUtil.exec('update tb_announcement set title = ?, img = ?, date = ?,type = ? where id = ?',
+        [title, img, updateTime,type, id])
         .then(result => {
             return res.json(orderStatus.ORDER_UPDATE_SUCCESS)
         }).catch(err => {
             console.log('err: ', err)
             return res.json(orderStatus.ORDER_UPDATE_ERROR)
         })
+})
+
+//图片上传
+orderRouter.post('/upload', (req, res) => {
+    return res.json(orderStatus.ORDER_UPLOAD_SUCCESS)
 })
 
 module.exports = orderRouter

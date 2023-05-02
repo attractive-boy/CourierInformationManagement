@@ -49,7 +49,7 @@ export default {
       userForm: reactive({
         userTypeName: '管理员',
         username: 'admin',
-        password: 'asd'
+        password: ''
       }),
       UserTypeNameMap
     }

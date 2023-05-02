@@ -8,7 +8,7 @@
       <el-input v-model="userForm.password" type="password" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="用户类型" prop="userTypeName">
-      <el-select v-model="userForm.userTypeName" placeholder="请选择用户类型">
+      <el-select v-model="userForm.userTypeName" placeholder="请选择用户类型" disabled>
         <el-option v-for="(value, index) in UserType" :key="index" :label="value.name" :value="value.name" />
       </el-select>
     </el-form-item>
@@ -20,7 +20,7 @@
   
 <script>
 import "element-plus/theme-chalk/dark/css-vars.css";
-import { getUserInfo } from '../api/userApi';
+import { getUserInfo, updatemyself } from '../api/userApi';
 export default {
   name: "HomeView",
   data() {
@@ -29,11 +29,12 @@ export default {
         username: "",
         password: "",
         email: "",
-        userTypeName: ""
+        userTypeName: "",
+        id: ""
       },
       UserType: {
-        1: {name: '管理员'},
-        2: {name: '用户'}
+        1: { name: '管理员' },
+        2: { name: '用户' }
       },
       rules: {
         username: [
@@ -61,8 +62,28 @@ export default {
       this.userForm.username = res.data.data.username;
       this.userForm.password = res.data.data.password;
       this.userForm.userTypeName = res.data.data.userTypeName;
+      debugger
+      this.userForm.id = res.data.data.id;
     });
   },
+  methods: {
+    onSubmit() {
+      debugger
+      updatemyself(this.userForm).then(res => {
+        if (res.data.code === 2300) {
+          this.$message({
+            message: "修改成功",
+            type: "success"
+          });
+        } else {
+          this.$message({
+            message: "修改失败",
+            type: "error"
+          });
+        }
+      });
+    }
+  }
 };
 </script>
 

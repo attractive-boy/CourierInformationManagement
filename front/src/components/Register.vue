@@ -49,6 +49,7 @@ export default {
         email: ''
       }),
       UserType: {
+        1: {name: '管理员'},
         2: {name: '用户'}
       }
     };
@@ -90,7 +91,6 @@ export default {
         }
         ElNotification({
           title: "注册成功",
-          message: "请等待管理员审核，通过后即可登录",
           type: "success"
         });
         this.$router.push(userHomeMap[this.userForm.userTypeName])
