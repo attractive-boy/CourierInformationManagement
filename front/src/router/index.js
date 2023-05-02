@@ -13,9 +13,9 @@ import AdminOrder from "@/components/admin/AdminOrder"
 import Operator from "@/components/operator/Operator";
 import OperatorOrder from "@/components/operator/OperatorOrder";
 import OperatorCompleteOrder from "@/components/operator/OperatorCompleteOrder";
+import EnterpriseinfoView from "@/components/operator/Enterpriseinfo";
+import message from "@/components/admin/Message";
 
-import Driver from "@/components/driver/Driver";
-import DriverTransport from "@/components/driver/DriverTransport";
 
 
 // 路由配置
@@ -41,6 +41,8 @@ const routes = [
             {name: 'admin-order', path: 'order', component: AdminOrder},
             // {name: 'admin-transport', path: 'transport', component: Transport},
             {name: 'admin-home', path: 'home', component: Home},
+            {name: 'admin-message', path: 'message', component: message},
+            {name: 'addannouncement', path: 'addannouncement', component: () => import('@/components/admin/Announcement')},
         ]
     },
     {
@@ -52,25 +54,10 @@ const routes = [
             {name: 'operator-all', path: 'order', component: OperatorOrder},
             {name: 'operator-complete', path: 'complete', component: OperatorCompleteOrder},
             {name: 'operator-home', path: 'home', component: Home},
+            {name: 'EnterpriseinfoView', path: 'EnterpriseinfoView', component: EnterpriseinfoView},
+            {name: 'adminn-home', path: 'home', component: Home},
         ]
-    },
-    {
-        name: 'driver',
-        path: UserTypeNameMap[UserType.DRIVER].url,
-        component: Driver,
-        redirect: {name: 'driver-transport'},
-        children: [
-            {
-                name: 'driver-transport',
-                path: 'transport',
-                component: DriverTransport,
-                props: {
-                    pageTitle: '查看运输任务', adminMod: false
-                }
-            },
-            {name: 'driver-home', path: 'home', component: Home},
-        ]
-    },
+    }
 ]
 
 // 创建路由

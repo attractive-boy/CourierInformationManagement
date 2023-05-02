@@ -14,7 +14,7 @@
             ref="orderTable"
           >
             <el-table-column prop="id" label="订单号" :min-width="70" sortable />
-            <el-table-column prop="operatorId" label="操作员 Id" />
+            <el-table-column prop="operatorId" label="用户 Id" />
             <el-table-column prop="sender" label="发货客户" />
             <el-table-column prop="receiver" label="收货客户" />
             <el-table-column prop="sendWarehouse" label="发货仓" />
@@ -65,7 +65,7 @@
               <el-form-item label="订单号" :label-width="'100px'">
                 <el-input v-model="editingOrder.id" disabled></el-input>
               </el-form-item>
-              <el-form-item label="操作员id" :label-width="'100px'">
+              <el-form-item label="用户id" :label-width="'100px'">
                 <el-input v-model="editingOrder.operatorId" disabled></el-input>
               </el-form-item>
               <el-form-item label="发货客户" :label-width="'100px'">
@@ -102,7 +102,7 @@
             custom-class="dialog-class"
           >
             <el-form :model="editingOrder">
-              <el-form-item label="操作员 Id" :label-width="'100px'">
+              <el-form-item label="用户 Id" :label-width="'100px'">
                 <el-input v-model="curUser.id" disabled></el-input>
               </el-form-item>
               <el-form-item label="发货客户" :label-width="'100px'">
@@ -165,7 +165,7 @@
             row.sendWarehouse.toLowerCase().includes(this.search.toLowerCase()) ||
             row.receiver.toLowerCase().includes(this.search.toLowerCase()) ||
             row.receiveWarehouse.toLowerCase().includes(this.search.toLowerCase()) ||
-            row.id.toString().includes(this.search.toLowerCase())
+            row.id.toString() == this.search.toLowerCase()
           );
         });
       },
@@ -191,6 +191,7 @@
             });
             return;
           }
+          debugger
           this.orderList = res.data.data;
         });
       },
@@ -251,7 +252,7 @@
         row.orderStatus = '待分配',
         addOrder(row)
         .then((res) => {
-            if (res.data.code != 3000) {
+            if (res.status != 200) {
                 // 修改失败
                 ElNotification({
                 title: "Error",

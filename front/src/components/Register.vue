@@ -10,34 +10,18 @@
       <div class="sign-up-container" style="margin: 20px">
         <el-form :model="userForm" label-width="70px" label-position="left">
           <el-form-item label="用户类型">
-            <el-select
-              v-model="userForm.userTypeName"
-              placeholder="选择您的用户类型"
-            >
-              <el-option
-                v-for="(value, index) in UserType"
-                :key="index"
-                :label="value.name"
-                :value="value.name"
-              />
+            <el-select v-model="userForm.userTypeName" placeholder="选择您的用户类型">
+              <el-option v-for="(value, index) in UserType" :key="index" :label="value.name" :value="value.name" />
             </el-select>
           </el-form-item>
           <el-form-item label="用户名">
             <el-input v-model="userForm.username" placeholder="请输入用户名" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input
-              v-model="userForm.password"
-              type="password"
-              placeholder="请输入密码"
-              show-password
-            />
+            <el-input v-model="userForm.password" type="password" placeholder="请输入密码" show-password />
           </el-form-item>
           <el-form-item label="邮箱">
-            <el-input
-              v-model="userForm.email"
-              placeholder="请输入邮箱"
-            />
+            <el-input v-model="userForm.email" placeholder="请输入邮箱" />
           </el-form-item>
           <!-- <el-form-item> -->
           <el-button type="primary" @click="onSubmit">注册</el-button>
@@ -47,7 +31,7 @@
     </div>
   </div>
 </template>
-  <script>
+<script>
 import { reactive } from "vue";
 import { submitRegister } from "../api/userApi";
 import {userHomeMap} from "@/util/constant"
@@ -65,8 +49,7 @@ export default {
         email: ''
       }),
       UserType: {
-        1: {name: '操作员'},
-        2: {name: '司机'}
+        2: {name: '用户'}
       }
     };
   },

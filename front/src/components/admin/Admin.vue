@@ -9,7 +9,7 @@
               <el-icon>
                 <Avatar />
               </el-icon>
-              <span>用户管理</span>
+              <span>信息管理</span>
             </router-link>
           </template>
           <router-link :to="{name:'admin-user-all'}">
@@ -17,7 +17,23 @@
               <el-icon>
                 <User/>
               </el-icon>
-              <span>统一管理</span>
+              <span>用户管理</span>
+            </el-menu-item>
+          </router-link>
+          <router-link :to="{name:'admin-message'}">
+            <el-menu-item index="admin-message">
+              <el-icon>
+                <User/>
+              </el-icon>
+              <span>留言管理</span>
+            </el-menu-item>
+          </router-link>
+          <router-link :to="{name:'addannouncement'}">
+            <el-menu-item index="addannouncement">
+              <el-icon>
+                <User/>
+              </el-icon>
+              <span>公告信息管理</span>
             </el-menu-item>
           </router-link>
         </el-sub-menu>

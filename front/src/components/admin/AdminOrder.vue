@@ -11,7 +11,7 @@
           ref="orderTable"
         >
           <el-table-column prop="id" label="订单号" :min-width="70" sortable />
-          <el-table-column prop="operatorId" label="操作员id" />
+          <el-table-column prop="operatorId" label="用户id" />
           <el-table-column prop="sender" label="发货客户" />
           <el-table-column prop="receiver" label="收货客户" />
           <el-table-column prop="sendWarehouse" label="发货仓" />
@@ -148,7 +148,7 @@ export default {
           row.receiveWarehouse
             .toLowerCase()
             .includes(this.search.toLowerCase()) ||
-          row.id.toString().includes(this.search.toLowerCase())
+            row.id.toString() == this.search.toLowerCase()
         );
       });
     },

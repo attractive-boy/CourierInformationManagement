@@ -2,21 +2,22 @@
   <el-container>
     <el-header>
       <div class="logo_container">
-        <el-button text @click="this.$router.push({name: 'home'})">
-          <img class="logo" src="/favicon.svg"/>
+        <el-button text @click="this.$router.push({ name: 'home' })">
+          <img class="logo" src="/favicon.svg" />
           <h1>物流管理系统</h1>
         </el-button>
       </div>
+      <span v-if="this.$route.path != '/login'" class="logout" v-on:click="userSignOut">退出登录</span>
     </el-header>
-    <router-view/>
+    <router-view />
   </el-container>
 </template>
 
 <script>
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import {User, CircleClose} from '@element-plus/icons-vue'
-import {logout} from '@/api/userApi'
-import {ElNotification} from "element-plus";
+import { User, CircleClose } from '@element-plus/icons-vue'
+import { logout } from '@/api/userApi'
+import { ElNotification } from "element-plus";
 export default {
   name: 'App',
   data() {
@@ -30,7 +31,7 @@ export default {
      */
     userSignOut() {
       logout()
-      this.$router.push({name: 'home'})
+      this.$router.push({ name: 'home' })
       ElNotification({
         title: '退出成功',
         message: '欢迎您下次再来😃',
@@ -42,7 +43,6 @@ export default {
 </script>
 
 <style scoped>
-
 .el-header {
   display: flex;
   justify-content: space-between;
@@ -70,5 +70,9 @@ export default {
 .content {
   padding-left: 8px;
   padding-right: 8px;
+}
+.logout{
+  height: 100%;
+  line-height: 60px;
 }
 </style>

@@ -11,13 +11,11 @@ module.exports = {
      */
     userTypeMap: {
         1: '管理员',
-        2: '操作员',
-        3: '司机',
+        2: '用户',
     },
     userTypeNameMap: {
         ADMIN: 1,
         OPERATOR: 2,
-        DRIVER: 3,
     },
     STATUS: {
         /**

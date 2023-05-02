@@ -7,10 +7,15 @@ const cors = require('cors')
 const jwtUtil = require('../util/jwtUtil')
 const userRouter = require('./user')
 const orderRouter = require('./order')
+const messageRouter = require('./message')
+const proxy = require("express-http-proxy")
+const announcementRouter = require('./announcement')
 
 const app = new express()
+
 // 配置跨域问题
 app.use(cors())
+app.use("/sf", proxy('www.sf-express.com'));
 // body parser 中间件
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -20,7 +25,7 @@ app.use((req, res, next) => {
     const path = req.path
     const token = req.headers['authorization']
     // 无需鉴权
-    if (path === '/user/login' || path == '/user/register') {
+    if (path === '/user/login' || path == '/user/register' || path == '/sf') {
         return next()
     }
     // 没有携带 token
@@ -54,6 +59,9 @@ app.use((req, res, next) => {
 // 引入路由
 app.use('/user', userRouter)
 app.use('/order', orderRouter)
+app.use('/message', messageRouter)
+app.use('/announcement', announcementRouter)
+
 
 // 统一处理
 app.use('*', (req, res) => {
